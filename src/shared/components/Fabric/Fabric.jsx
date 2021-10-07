@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { fabric as fabricJs } from 'fabric';
 import { useDispatch, connect } from 'react-redux';
-import { fabricStart, canvasAdd, canvasRemove } from '../../../actions';
+import { fabricStart, canvasAdd, canvasRemove, canvasPreview } from '../../../actions';
 import { string } from 'prop-types';
-import './Fabric.scss';
+import './Fabric.css';
 
 const Fabric = ({ id, width, height, fabricState }) => {
   const dispatch = useDispatch();
@@ -21,20 +21,53 @@ const Fabric = ({ id, width, height, fabricState }) => {
             dispatch(canvasAdd(new fabricJs.Text('Teste Me!')));
           }}
         >
-          ADD
+          ADD Text
         </button>
         <button
           type="button"
           onClick={() => {
-            dispatch(canvasRemove(new fabricJs.Text('Teste Me!')));
+            const url =
+              'https://kamizetaqasa.blob.core.windows.net/rchloplus/NossasEstampas/04-girl-power/RCHLO_04-girl-power-01%401199x1500.png';
+
+            new fabricJs.Image.fromURL(
+              url,
+              (image) => {
+                dispatch(canvasAdd(image));
+              },
+              {
+                scaleX: 0.1,
+                scaleY: 0.1,
+                selectable: true,
+                objectCaching: true,
+                crossOrigin: 'Anonymous',
+              },
+            );
+          }}
+        >
+          ADD Image
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            dispatch(canvasRemove());
           }}
         >
           REMOVE
         </button>
       </header>
       <main>
-        <canvas id={id} width={width} height={height}></canvas>
+        <canvas id={id} width={width} height={height} />
       </main>
+      <footer>
+        <button
+          type="button"
+          onClick={() => {
+            dispatch(canvasPreview());
+          }}
+        >
+          Preview
+        </button>
+      </footer>
     </article>
   );
 };
@@ -51,7 +84,8 @@ Fabric.defaultProps = {
   height: '300',
 };
 
-export default connect(
-  ({ fabricState }) => ({ fabricState }),
-  { fabricStart, canvasAdd, canvasRemove },
-)(Fabric);
+export default connect(({ fabricState }) => ({ fabricState }), {
+  fabricStart,
+  canvasAdd,
+  canvasRemove,
+})(Fabric);

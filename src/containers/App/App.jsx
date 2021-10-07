@@ -5,7 +5,7 @@ import Fabric from '../../shared/components/Fabric/Fabric';
 function App() {
   return (
     <main className="container">
-      <Fabric width="300" height="300"></Fabric>
+      <Fabric width="235" height="299" />
     </main>
   );
 }

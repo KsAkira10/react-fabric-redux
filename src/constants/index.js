@@ -7,3 +7,5 @@ export const CANVAS_ADD = '@@canvas/ADD';
 export const CANVAS_ADDED = '@@canvas/ADDED';
 export const CANVAS_REMOVE = '@@canvas/REMOVE';
 export const CANVAS_REMOVED = '@@canvas/REMOVED';
+
+export const CANVAS_PREVIEW = '@@canvas/PREVIEW';
