@@ -3,7 +3,7 @@ import { fabric as fabricJs } from 'fabric';
 import { useDispatch, connect } from 'react-redux';
 import { fabricStart, canvasAdd, canvasRemove } from '../../../actions';
 import { string } from 'prop-types';
-import './Fabric.scss';
+import './Fabric.css';
 
 const Fabric = ({ id, width, height, fabricState }) => {
   const dispatch = useDispatch();
